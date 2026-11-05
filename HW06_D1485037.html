@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW06 - 國家漫畫博物館</title>
+    <!-- SEO 相關 Meta 標籤 -->
+    <meta name="description" content="國家漫畫博物館走讀報導：漫步台中刑務所演武場官舍群，探索台灣漫畫文化與百年日式建築的交會。">
+    <meta name="author" content="D1485067 林芸溱">
+
+    <!-- 內部樣式表 (Internal Style Sheet) -->
+    <style>
+        /* ==========================================
+           1. 全域與無障礙設定 (Global & Accessibility)
+           ========================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 元素選擇器：全頁基礎字體與行高設定（對照範例字級） */
+        body {
+            font-family: "Microsoft JhengHei", "PingFang TC", "Heiti TC", sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #2D3732;
+            padding: 40px 20px;
+        }
+
+        /* 寬版內容容器限制與中央對齊 */
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        /* 水平分隔線樣式 */
+        hr {
+            border: none;
+            border-top: 1px solid #D1CFC0;
+            margin: 20px 0;
+        }
+
+        /* ==========================================
+           2. 卡片與排版區塊 (Card & Layout)
+           ========================================== */
+        .card {
+            background-color: #F8F7F2;
+            border-radius: 8px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E2E0D4;
+        }
+
+        /* 標題層次對照老師範例尺寸 */
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+            line-height: 1.25;
+        }
+
+        /* 章節大標題：左側深綠色垂直裝飾線 */
+        h2 {
+            font-size: 22px;
+            color: #1E382B;
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 5px solid #4D6A55;
+            line-height: 1.2;
+        }
+
+        /* 三級標題 */
+        h3 {
+            font-size: 18px;
+            color: #1E382B;
+            margin: 14px 0 10px 0;
+        }
+
+        /* 一般內文段落 */
+        p {
+            font-size: 16px;
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+
+        mark {
+            background-color: #D4A359;
+            color: #FFFFFF;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        /* 內文說明段落：左側焦糖棕色垂直裝飾線 */
+        .intro-text {
+            font-size: 16px;
+            color: #2D3732;
+            padding-left: 12px;
+            border-left: 4px solid #C4823A;
+            margin: 12px 0 16px 0;
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           3. 頁首卡片與目錄導覽 (Header & Navigation)
+           ========================================== */
+        .header-card {
+            background-color: #1E382B;
+            color: #FFFFFF;
+            padding: 32px 28px;
+        }
+
+        .header-card p {
+            font-size: 15px;
+            color: #E2E2D8;
+            margin-bottom: 10px;
+        }
+
+        .meta-info {
+            font-size: 14px;
+            color: #A3B8AC;
+            margin-top: 18px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* 目錄導覽清單 (Tag 風格按鈕) */
+        .toc-list {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .toc-list li a {
+            display: inline-block;
+            background-color: #E8E6DC;
+            color: #2D3732;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 15px;
+            border: 1px solid #D1CFC0;
+            transition: all 0.2s ease;
+        }
+
+        /* 連結 Hover 與 Focus 提示 */
+        a {
+            color: #2A5A44;
+            text-decoration: none;
+        }
+
+        a:hover, .toc-list li a:hover {
+            color: #1E382B;
+            text-decoration: underline;
+        }
+
+        .toc-list li a:hover {
+            background-color: #D4A359;
+            color: #FFFFFF;
+            border-color: #D4A359;
+            text-decoration: none;
+        }
+
+        a:focus, .toc-list li a:focus, summary:focus {
+            outline: 3px solid #D4A359;
+            outline-offset: 2px;
+        }
+
+        /* ==========================================
+           4. 表格樣式 (CSS Table)
+           ========================================== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 14px 0;
+            font-size: 15px;
+            background-color: #FFFFFF;
+        }
+
+        caption {
+            caption-side: top;
+            text-align: left;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #1E382B;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: #E2E0D4;
+            color: #1E382B;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #D1CFC0;
+        }
+
+        td {
+            padding: 12px;
+            border: 1px solid #E8E6DC;
+        }
+
+        /* ==========================================
+           5. 媒體與 RWD 自適應 (Media RWD)
+           ========================================== */
+        figure {
+            margin: 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            display: block;
+        }
+
+        figcaption {
+            font-size: 14px;
+            color: #666666;
+            margin-top: 8px;
+        }
+
+        /* 影片與地圖 16:9 RWD 自適應容器 */
+        .media-aspect-ratio {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 6px;
+            margin: 14px 0;
+        }
+
+        .media-aspect-ratio iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ==========================================
+           6. 清單與走讀小提醒 (Lists & Special Section)
+           ========================================== */
+        ul, ol {
+            padding-left: 24px;
+            margin-bottom: 14px;
+            font-size: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* 走讀小提醒區塊樣式 */
+        #sec7 {
+            background-color: #ECEFE3;
+            border-left: 6px solid #556B2F;
+            border-top: 1px solid #DFE3D5;
+            border-right: 1px solid #DFE3D5;
+            border-bottom: 1px solid #DFE3D5;
+            border-radius: 8px;
+            padding: 28px;
+        }
+
+        #sec7 h3 {
+            font-size: 20px;
+            color: #1E382B;
+            font-weight: bold;
+            margin-bottom: 16px;
+            padding-left: 12px;
+            border-left: 4px solid #556B2F;
+            line-height: 1.2;
+        }
+
+        #sec7 details {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+        }
+
+        #sec7 summary {
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2D3732;
+            margin-bottom: 14px;
+        }
+
+        /* ==========================================
+           7. ID 選擇器與最底下頁尾 (Footer)
+           ========================================== */
+        #photo img {
+            border: 2px solid #D1CFC0;
+        }
+
+        #video p {
+            font-size: 15px;
+        }
+
+        /* 頁尾雙分隔線 */
+        .footer-divider-top {
+            border: none;
+            border-top: 1px solid #D8D6C9;
+            margin-bottom: 8px;
+        }
+
+        .footer-divider-main {
+            border: none;
+            border-top: 2px solid #4D6A55;
+            margin-bottom: 28px;
+        }
+
+        /* 頁尾區塊：無白底卡片、全體文字置中 */
+        footer.custom-footer {
+            background-color: transparent;
+            text-align: center !important;
+            padding: 10px 0 40px 0;
+            font-size: 15px;
+            color: #4A5568;
+            width: 100%;
+        }
+
+        footer.custom-footer p,
+        footer.custom-footer a {
+            text-align: center !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer.custom-footer p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        footer.custom-footer .footer-title {
+            font-weight: bold;
+            color: #2D3732;
+            font-size: 17px;
+        }
+
+        footer.custom-footer a {
+            color: #2A5A44;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        footer.custom-footer a:hover {
+            color: #1E382B;
+        }
+
+        footer.custom-footer .back-to-top-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<!-- 行內 style 處 1：設定全頁奶茶色背景與最小高度 -->
+<body id="top" style="background-color: #E2E2D8; min-height: 100vh;">
+
+<div class="container">
+
+    <!-- 頁首 Banner -->
+    <!-- 行內 style 處 2：頂部深金色裝飾線條 -->
+    <header class="card header-card" style="border-top: 5px solid #D4A359;">
+        <h1>國家漫畫博物館：演武場裡的台漫新風華</h1>
+        <p>文化走讀・日式官舍・台漫主題展演</p>
+        <p><strong>從百年刑務所官舍到台漫基地，走進跨越時代的漫畫宇宙。</strong></p>
+        <p>本期焦點：<mark>國家級漫畫園區與歷史建築共融</mark>，從展區導覽延伸至地理位置。</p>
+        <p class="meta-info">作者：D1485037 謝曼娸 | 報導整理日期：2026 年 10 月 22 日<br>本文為資訊整理型教學報導，走讀漫遊記錄。</p>
+    </header>
+
+    <hr>
+
+    <!-- 報導目錄 -->
+    <section class="card">
+        <h3>報導目錄</h3>
+        <ul class="toc-list">
+            <li><a href="#sec1">一、國漫館簡介</a></li>
+            <li><a href="#sec2">二、園區特色與散步順序</a></li>
+            <li><a href="#sec3">三、展館比較表</a></li>
+            <li><a href="#sec4">四、園區寫真照片</a></li>
+            <li><a href="#sec5">五、影音報導</a></li>
+            <li><a href="#sec6">六、位置地圖：找到國漫館</a></li>
+            <li><a href="#sec7">走讀小提醒</a></li>
+            <li><a href="#sec8">七、資料來源</a></li>
+        </ul>
+    </section>
+
+    <hr>
+
+    <!-- 第一節 -->
+    <section class="card" id="sec1">
+        <h2>一、國漫館簡介</h2>
+        <p>國家漫畫博物館（國漫館）位於台中市西區，基地落腳於具有百年歷史的「台中刑務所官舍群」。自 2023 年底率先開展東側基地以來，園區將日式木造官舍與演武場歷史建築活化，轉型為兼具保存、展覽、研究與產業體驗的國家級漫畫主題園區。</p>
+        <p>國漫館打破傳統博物館的單一建築框架，以「在園區裡遇見漫畫」為核心理念。遊客穿梭於百年榕樹樹屋、榻榻米展間與日式庭園之間，不僅能感受濃厚的文化資產氛圍，更能近距離體驗台灣原創漫畫的獨特魅力。</p>
+        <p>從日治時期刑務所官舍的歲月痕跡，到當代台漫創作者的多元呈現，國家漫畫博物館為台中舊城區注入了極具活力與想像力的文化新浪潮。</p>
+        <p>
+            園區地址：台中市西區林森路 33 號。<br>
+            閱讀重點：國家級漫畫館、日式官舍建築群與台灣原創漫畫。
+        </p>
+    </section>
+
+    <hr>
+
+    <!-- 第二節 -->
+    <section class="card" id="sec2">
+        <h2>二、園區特色與散步順序</h2>
+        <h3>值得留意的三個特色</h3>
+        <ul>
+            <li><strong>官舍建築群：</strong>完整保留台中刑務所演武場及周邊日式木造官舍，展現傳統日式工藝美學。</li>
+            <li><strong>沉浸式漫畫展演：</strong>結合木造塌榻米空間，打造獨一無二的台漫主題展覽與體驗式閱讀區。</li>
+            <li><strong>綠意景觀巨木：</strong>園區內擁有巨大百年老榕樹與鏡池，營造出極具人文氣息的城市散步秘境。</li>
+        </ul>
+
+        <h3>建議散步順序</h3>
+        <p class="intro-text">以下是本報導規劃的散步建議，您可以依參觀時間與興趣彈性調整。</p>
+        <ol>
+            <li>由林森路主要入口進入園區，先欣賞台中刑務所演武場宏偉的日式棟札建築。</li>
+            <li>漫步至鏡池與大榕樹區，感受自然綠意與歷史建築交織的優雅景觀。</li>
+            <li>參觀各棟木造官舍內的台漫主題特展，體驗榻榻米上的漫畫閱讀時光。</li>
+            <li>前往快閃店家或文創賣店挑選台灣原創周邊，最後在園區茶館休憩整理心得。</li>
+        </ol>
+    </section>
+
+    <hr>
+
+    <!-- 第三節 -->
+    <section class="card" id="sec3">
+        <h2>三、展館比較表</h2>
+        <!-- 行內 style 處 3：設定表格外框陰影，確保無障礙視覺體驗 -->
+        <table style="margin-top: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <caption>國家漫畫博物館主要代表性展區設施比較表</caption>
+            <thead>
+                <tr>
+                    <th>展區名稱</th>
+                    <th>建築與空間特色</th>
+                    <th>建議參觀重點</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>台中刑務所演武場</td>
+                    <td>日式傳統道場建築、挑高木構大廳</td>
+                    <td>欣賞嚴謹的日式工藝與主題特展體驗</td>
+                </tr>
+                <tr>
+                    <td>東側官舍群展館</td>
+                    <td>日式宿舍住宅、木造榻榻米空間</td>
+                    <td>脫鞋體驗沉浸式台漫展覽與閱讀環境</td>
+                </tr>
+                <tr>
+                    <td>鏡池與大榕樹區</td>
+                    <td>戶外水景鏡池、百年巨大老榕樹</td>
+                    <td>拍攝建築倒影與戶外漫畫裝置藝術打卡</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <hr>
+
+    <!-- 第四節：圖片展示 -->
+    <section class="card" id="sec4">
+        <div id="photo">
+            <h2>四、園區寫真照片</h2>
+            <figure>
+                 <img src="images/照片.webp" alt="國家漫畫博物館">
+                <figcaption>
+                    國家漫畫博物館結合百年日式木造建築與綠意庭園，為台灣首座國家級漫畫博物館。
+                    圖片來源：國家漫畫博物館走讀專題資料庫。
+                </figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- 第五節：影音報導 -->
+    <section class="card" id="sec5">
+        <div id="video">
+            <h2>五、影音報導</h2>
+            <p>觀賞影片深入了解國家漫畫博物館園區空間、日式官舍建築與豐富的台漫展覽：</p>
+            
+            <p>透過下方影片認識國家漫畫博物館，比對影片畫面與本文介紹的景點。</p>
+    <div>
+        <!-- YouTube 嵌入示範 -->
+       <iframe width="560" height="315" src="https://www.youtube.com/embed/waTi1YBfIeA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <p>影片：台中國家漫畫博物館園區 Taichung National Taiwan Museum of Comics 原臺中刑務所演武場周邊，台中的休閒放鬆的好去處 | 發布者：台灣小散步 Taiwan吃GoGo。</p>
+    </div>
+    <p><a href="https://youtu.be/waTi1YBfIeA?si=rans7gdcOOeaKW5E" target="_blank">在 YouTube 觀看 國家漫畫博物館開展影片介紹（另開分頁）</a></p>
+    <p><em>影片為外部作者發布的導覽介紹，版權與內容以最新官方資訊為準。</em></p>
+    <p>本報導閱讀建議使用資訊夾的 Live Server 或本機預覽 HTML；若本機預覽無網路，請使用 HTTP 預覽上方 YouTube 連結。</p>
+    <!-- 第六節：位置地圖 -->
+    <section class="card" id="sec6">
+        <h2>六、位置地圖：找到國漫館</h2>
+        <p>國家漫畫博物館位於台中市西區，地址為<strong>林森路 33 號</strong>（原台中刑務所演武場）。下方地圖標示園區位置，方便讀者規劃交通路線。</p>
+        
+        <div class="media-aspect-ratio">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.941652158942!2d120.67285187597142!3d24.136318073741165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693cf836fb05bd%3A0x6739023ebc4ef674!2zIOWLp-mAn-iLseWciA!5e0!3m2!1szh-TW!2stw!4v1710000000000!5m2!1szh-TW!2stw" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <p><a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">在 Google 地圖開啟國家漫畫博物館（另開分頁）</a></p>
+        <p><small>地圖資訊由 Google 地圖提供；建議搭乘公車至「刑務所演武場」站下車即達。</small></p>
+    </section>
+
+    <hr>
+
+    <!-- 走讀小提醒 -->
+    <section class="card" id="sec7">
+        <h3>走讀小提醒</h3>
+        <details open>
+            <summary>出發到園區走讀時，記得這三件事</summary>
+            <ul>
+                <li>入內參觀日式榻榻米展館需脫鞋並穿著襪子，請依現場指引配合。</li>
+                <li>園區歷史建築與百年老樹多，請共同維護古蹟環境不隨意拉扯植物。</li>
+                <li>拍照時請留意展館著作權規範；戶外鏡池與庭園步道請注意行走安全。</li>
+            </ul>
+        </details>
+    </section>
+
+    <hr>
+
+    <!-- 第七節：資料來源 -->
+    <section class="card" id="sec8">
+        <h2>七、資料來源</h2>
+        <p>本報導依下列公開資料整理，散步順序與展區規劃感謝各出處作者貢獻。</p>
+        <ul>
+            <li><a href="https://www.ncm.gov.tw/" target="_blank" rel="noopener noreferrer">國家漫畫博物館籌備處官方網站</a></li>
+            <li><a href="https://www.cultural.taichung.gov.tw/" target="_blank" rel="noopener noreferrer">台中市文化局：台中刑務所官舍群歷史介紹</a></li>
+            <li><a href="https://travel.taichung.gov.tw/" target="_blank" rel="noopener noreferrer">台中觀光旅遊網：國家漫畫博物館景點推薦</a></li>
+        </ul>
+        <p><small>資料整理日期：2026 年 10 月 22 日。</small></p>
+    </section>
+
+    <!-- 頁尾前分隔線 -->
+    <hr class="footer-divider-top">
+    <hr class="footer-divider-main">
+
+    <!-- 頁尾區塊 -->
+    <footer class="custom-footer" style="text-align: center !important;">
+        <p class="footer-title">第六次 HTML 與 CSS 作業範例｜國家漫畫博物館報導</p>
+        <p>作者：D1485037 謝曼娸・更新日期：2026 年 10 月 22 日</p>
+        <p>CSS 教學參考：<a href="https://steam.oxxostudio.tw/category/css/index.html" target="_blank" rel="noopener noreferrer">STEAM：開始使用 CSS（方法一、方法二）</a>。</p>
+        <p>文字依來源整理；照片與影片權利屬原作者。本文為課堂作業。</p>
+        <p><a href="#top" class="back-to-top-link">回到頁首</a></p>
+    </footer>
+
+</div>
+
+</body>
+</html>
